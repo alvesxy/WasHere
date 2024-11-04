@@ -20,4 +20,6 @@ public interface PresenceRelation extends JpaRepository<Presence, UUID> {
     @Query("UPDATE Presence p SET p.isPresent = true WHERE p.lesson = :lesson AND p.student = :student")
     public void setPresenceByChipAndDate(@Param("lesson") Lesson lesson, @Param("student") Student student);
 
+    @Query("SELECT p.isPresent FROM Presence p WHERE p.lesson = :lesson AND p.student = :student")
+    public boolean yetPresent (@Param("lesson") Lesson lesson, @Param("student") Student student);
 }

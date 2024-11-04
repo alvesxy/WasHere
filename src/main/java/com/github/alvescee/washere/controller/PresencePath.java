@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -43,6 +44,8 @@ public class PresencePath {
         
         if (lesson.isEmpty()) return ResponseEntity.badRequest().build();
         if (student.isEmpty()) return ResponseEntity.notFound().build();
+
+        if (this.presenceRelation.yetPresent(lesson.get(), student.get())) return ResponseEntity.status(HttpStatus.CONFLICT).build();
 
         this.presenceRelation.setPresenceByChipAndDate(lesson.get(), student.get());
 
