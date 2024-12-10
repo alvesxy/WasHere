@@ -34,6 +34,18 @@ class ReadFile {
 
             this->content = content;
         }
+
+        // Getter
+
+        String getContent () {
+            return this->content;
+        }
+
+        // Setter
+
+        void setContent (String content) {
+            this->content = content;
+        }
 };
 
 #endif
