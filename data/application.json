@@ -2,5 +2,10 @@
     "RFID": {
         "SS": 5,
         "RST": 22
+    },
+
+    "route": {
+        "URL": "http://.../make",
+        "type": "PUT"
     }
 }
