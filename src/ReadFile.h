@@ -2,6 +2,7 @@
 #define READFILE_H
 
 #include <Arduino.h>
+#include <ArduinoJson.h>
 
 #include <FS.h>
 #include <LittleFS.h>
@@ -10,7 +11,7 @@ class ReadFile {
 
     private:
 
-        String content;
+        JsonDocument content;
 
     public:
 
@@ -32,18 +33,18 @@ class ReadFile {
         
             file.close();
 
-            this->content = content;
+            DeserializationError error = deserializeJson(this->content, content);
         }
 
         // Getter
 
-        String getContent () {
+        JsonDocument getContent () {
             return this->content;
         }
 
         // Setter
 
-        void setContent (String content) {
+        void setContent (JsonDocument content) {
             this->content = content;
         }
 };
