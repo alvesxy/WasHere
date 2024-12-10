@@ -42,6 +42,20 @@ class ReadFile {
             return this->content;
         }
 
+        /**
+         * @return the SDA pin of the RFID
+         */
+        int getSS () {
+            return this->content["RFID"]["SS"];
+        }
+
+        /**
+         * @return the RESET pin of the RFID
+         */
+        int getRST () {
+            return this->content["RFID"]["RST"];
+        }
+
         // Setter
 
         void setContent (JsonDocument content) {
