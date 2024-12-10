@@ -44,16 +44,44 @@ class ReadFile {
 
         /**
          * @return the SDA pin of the RFID
-         */
+        */
         int getSS () {
             return this->content["RFID"]["SS"];
         }
 
         /**
          * @return the RESET pin of the RFID
-         */
+        */
         int getRST () {
             return this->content["RFID"]["RST"];
+        }
+
+        /**
+         * @return the URL to make request
+        */
+        String getURL () {
+            return this->content["route"]["URL"];
+        }
+
+        /**
+         * @return the type of the request (GET, POST, PUT, DELETE, PATCH...)
+        */
+        String getType () {
+            return this->content["route"]["type"];
+        }
+
+        /**
+         * @return the ssid to connect in wifi, this is the name when you search
+        */
+        String getSSID () {
+            return this->content["wifi"]["ssid"];
+        }
+
+        /**
+         * @return the password to connect in wifi
+        */
+        String getPassword () {
+            return this->content["wifi"]["password"];
         }
 
         // Setter
