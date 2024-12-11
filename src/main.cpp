@@ -2,9 +2,11 @@
 #include <SPI.h>
 
 #include <ReadFile.h>
+#include <Request.h>
 #include <Arduino.h>
 
 MFRC522 identificator;
+Request request;
 
 void setup() {
 
@@ -16,6 +18,7 @@ void setup() {
     identificator = MFRC522(read.getSS(), read.getRST());
     identificator.PCD_Init();
     
+    request = Request(read.getURL(), read.getType(), read.getSSID(), read.getPassword());
 }
 
 void loop() {
@@ -29,6 +32,8 @@ void loop() {
     for (byte i = 0; i < identificator.uid.size; i++) {
         identifier += identificator.uid.uidByte[i], DEC;
     }
+
+    Serial.println(request.send(request.toJson(identifier.toDouble())));
 
     identificator.PICC_HaltA();
 
