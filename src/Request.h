@@ -17,6 +17,13 @@ class Request {
 
     public:
 
+        /**
+         * Configure the future requests
+         * @param url is the fullpath of the request (http://a.com/accept)
+         * @param type of the request (GET, POST, PUT, DELETE)
+         * @param ssid is the name when you search to wifis
+         * @param password of to connect in wifi
+        */
         Request (String url, String type, String ssid, String password) {
 
             this->url = url;
