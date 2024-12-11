@@ -18,6 +18,8 @@ class Request {
 
     public:
 
+        Request () {}
+
         /**
          * Configure the future requests
          * @param url is the fullpath of the request (http://a.com/accept)
