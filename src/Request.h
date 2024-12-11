@@ -2,6 +2,7 @@
 #define REQUEST_H
 
 #include <Arduino.h>
+#include <ArduinoJson.h>
 
 #include <WiFi.h>
 #include <HTTPClient.h>
@@ -75,6 +76,22 @@ class Request {
             http.end();
 
             return status;
+        }
+
+        /**
+         * Make a String json with the identifier
+         * @return {"id": identifier}
+        */
+        String toJson (int identifier) {
+
+            JsonDocument json;
+
+            json["id"] = identifier;
+
+            String output;
+            serializeJson(json, output);
+
+            return output;
         }
 
 };
