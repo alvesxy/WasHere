@@ -51,6 +51,25 @@ class Request {
             
         }
 
+        /**
+         * Make http requests
+         * @param body is in format json to send in request
+         * @return the status code of the response
+        */
+        int send (String body) {
+
+            HTTPClient http;
+            http.begin(url);
+
+            http.addHeader("Content-Type", "application/json");
+
+            const int status = this->type(http, body);
+
+            http.end();
+
+            return status;
+        }
+
 };
 
 #endif REQUEST_H
