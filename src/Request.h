@@ -96,4 +96,4 @@ class Request {
 
 };
 
-#endif REQUEST_H
+#endif
