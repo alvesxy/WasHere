@@ -84,7 +84,7 @@ class Request {
          * Make a String json with the identifier
          * @return {"id": identifier}
         */
-        String toJson (double identifier) {
+        String toJson (uint identifier) {
 
             JsonDocument json;
 

@@ -33,7 +33,7 @@ void loop() {
         identifier += identificator.uid.uidByte[i], DEC;
     }
 
-    Serial.println(request.send(request.toJson(identifier.toDouble())));
+    Serial.println(request.send(request.toJson(identifier.toInt())));
 
     identificator.PICC_HaltA();
 
