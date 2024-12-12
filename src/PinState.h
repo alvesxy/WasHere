@@ -14,6 +14,8 @@ class PinState {
 
     public:
 
+        PinState () {}
+
         /**
          * Make a for each in the list states to handle correctly http status
          * @param json is the format base of the application.json
