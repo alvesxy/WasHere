@@ -10,7 +10,7 @@ class PinState {
 
     private:
 
-        std::vector<std::function<void()>> states = {};
+        std::vector<std::function<void(int http)>> states = {};
 
     public:
 
@@ -27,9 +27,21 @@ class PinState {
             JsonArray states = doc["states"];
 
             for (JsonObject state : states) {
-  
-              int status = state["status"];
-              int pin = state["pin"];
+
+                int pin = state["pin"];
+                int status = state["status"];
+
+                this->states.push_back([pin, status](int http) {
+                    
+                    if (http == status) {
+                        
+                        digitalWrite(pin, HIGH);
+                        delay(1000);
+                        digitalWrite(pin, LOW);
+
+                    }
+
+                });
 
             }
 
