@@ -31,6 +31,8 @@ class PinState {
                 int pin = state["pin"];
                 int status = state["status"];
 
+                pinMode(pin, OUTPUT);
+
                 this->states.push_back([pin, status](int http) {
                     
                     if (http == status) {
