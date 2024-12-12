@@ -4,7 +4,13 @@
 #include <Arduino.h>
 #include <ArduinoJson.h>
 
+#include <vector>
+
 class PinState {
+
+    private:
+
+        std::vector<std::function<void()>> states = {};
 
     public:
 
