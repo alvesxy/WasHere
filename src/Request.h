@@ -33,6 +33,7 @@ class Request {
         String url;
         std::function<int(HTTPClient&, String&)> type;
         String secret;
+        String issuer;
 
     public:
 
@@ -45,11 +46,13 @@ class Request {
          * @param ssid is the name when you search to wifis
          * @param password of to connect in wifi
          * @param secret is the key to backend side in json
+         * @param issuer is to see who send in backend side in json
         */
-        Request (String url, String type, String ssid, String password, String secret) {
+        Request (String url, String type, String ssid, String password, String secret, String issuer) {
 
             this->url = url;
             this->secret = secret;
+            this->issuer = issuer;
             
             if (type == "GET") {
                 this->type = [](HTTPClient& client, String& body) {
@@ -111,7 +114,7 @@ class Request {
             JsonDocument json;
 
             json["identifier"] = identifier;
-            json["iss"] = "com.github.alvesxy";
+            json["iss"] = this->issuer;
 
             String payload;
             serializeJson(json, payload);

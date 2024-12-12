@@ -114,6 +114,13 @@ class ReadFile {
             return this->content["secret"];
         }
 
+        /**
+         * @return who created the jwt
+         */
+        String getIssuer () {
+            return this->content["issuer"];
+        }
+
         // Setter
 
         void setContent (JsonDocument content) {

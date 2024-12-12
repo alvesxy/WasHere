@@ -36,7 +36,7 @@ void setup() {
     identificator = MFRC522(read.getSS(), read.getRST());
     identificator.PCD_Init();
     
-    request = Request(read.getURL(), read.getType(), read.getSSID(), read.getPassword(), read.getSecret());
+    request = Request(read.getURL(), read.getType(), read.getSSID(), read.getPassword(), read.getSecret(), read.getIssuer());
     pinState = PinState(read.getContentString());
 }
 
