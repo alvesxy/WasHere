@@ -42,6 +42,14 @@ class ReadFile {
             return this->content;
         }
 
+        String getContentString () {
+            
+            String json;
+            serializeJson(this->content, json);
+
+            return json;
+        }
+
         /**
          * @return the SDA pin of the RFID
         */
