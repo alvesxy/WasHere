@@ -46,6 +46,16 @@ class PinState {
             }
 
         }
+
+        /**
+         * Turn on any led, it is corresponding in states
+         * @param status is returned from the api
+        */
+        void explain (int status) {
+            for (const auto& func : states) {
+                func(status);
+            }
+        }
         
 };
 
