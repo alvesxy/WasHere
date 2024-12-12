@@ -9,6 +9,8 @@
 
 #include <functional>
 
+#include <ArduinoJWT.h>
+
 class Request {
 
     private:
@@ -82,18 +84,30 @@ class Request {
 
         /**
          * Make a String json with the identifier
-         * @return {"id": identifier}
+         * @return For example: {"token": "fPfdlq352Jlfdac"}
         */
         String toJson (uint identifier) {
+
+            ArduinoJWT jwt = ArduinoJWT("secret");
 
             JsonDocument json;
 
             json["identifier"] = identifier;
+            json["iss"] = "com.github.alvesxy";
 
-            String output;
-            serializeJson(json, output);
+            String payload;
+            serializeJson(json, payload);
 
-            return output;
+            String token = jwt.encodeJWT(payload);
+
+            json.clear();
+
+            json["token"] = token;
+
+            String encrypted;
+            serializeJson(json, encrypted);
+
+            return encrypted;
         }
 
 };
