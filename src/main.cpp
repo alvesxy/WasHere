@@ -1,12 +1,15 @@
 #include <MFRC522.h>
 #include <SPI.h>
 
+#include <Arduino.h>
+
 #include <ReadFile.h>
 #include <Request.h>
-#include <Arduino.h>
+#include <PinState.h>
 
 MFRC522 identificator;
 Request request;
+PinState pinState;
 
 void setup() {
 
@@ -19,6 +22,7 @@ void setup() {
     identificator.PCD_Init();
     
     request = Request(read.getURL(), read.getType(), read.getSSID(), read.getPassword());
+    pinState = PinState(read.getContentString());
 }
 
 void loop() {
@@ -33,7 +37,7 @@ void loop() {
         identifier += identificator.uid.uidByte[i], DEC;
     }
 
-    Serial.println(request.send(request.toJson(identifier.toInt())));
+    pinState.explain(request.send(request.toJson(identifier.toInt())));
 
     identificator.PICC_HaltA();
 
