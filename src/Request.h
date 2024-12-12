@@ -1,3 +1,18 @@
+/**
+ * @link https://www.linkedin.com/in/c-alves-f?
+ * 
+ * Table to connect esp32 with rfid
+ * 
+ * ESP32 | RFID
+ * 3V3 | 3.3v
+ * GND | GND
+ * defined in application.json as RST | RST
+ * defined in application.json as SS | SDA
+ * 19 | MISO
+ * 23 | MOSI
+ * 18 | SCK
+*/
+
 #ifndef REQUEST_H
 #define REQUEST_H
 
@@ -17,6 +32,7 @@ class Request {
 
         String url;
         std::function<int(HTTPClient&, String&)> type;
+        String secret;
 
     public:
 
@@ -28,10 +44,12 @@ class Request {
          * @param type of the request (GET, POST, PUT, DELETE)
          * @param ssid is the name when you search to wifis
          * @param password of to connect in wifi
+         * @param secret is the key to backend side in json
         */
-        Request (String url, String type, String ssid, String password) {
+        Request (String url, String type, String ssid, String password, String secret) {
 
             this->url = url;
+            this->secret = secret;
             
             if (type == "GET") {
                 this->type = [](HTTPClient& client, String& body) {
@@ -88,7 +106,7 @@ class Request {
         */
         String toJson (uint identifier) {
 
-            ArduinoJWT jwt = ArduinoJWT("secret");
+            ArduinoJWT jwt = ArduinoJWT(secret);
 
             JsonDocument json;
 
