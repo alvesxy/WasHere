@@ -157,6 +157,10 @@ class WasHere {
          * Hidden functions
         */
 
+        /**
+         * Function to read the file json and assign each value in a local variable
+         * @param local is the directory to see the json with values
+         */
         void assignVariables (String local);
 };
 
