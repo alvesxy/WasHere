@@ -2,7 +2,19 @@
 #define WASHERE_H
 
 #include <Arduino.h>
+#include <ArduinoJson.h>
+#include <ArduinoJWT.h>
+
+#include <WiFi.h>
+#include <HTTPClient.h>
+
 #include <vector>
+
+#include <functional>
+#include <stdexcept>
+
+#include <FS.h>
+#include <LittleFS.h>
 
 class WasHere {
 
@@ -160,8 +172,15 @@ class WasHere {
         /**
          * Function to read the file json and assign each value in a local variable
          * @param local is the directory to see the json with values
-         */
+        */
         void assignVariables (String local);
+
+        /**
+         * Function to verify if the RFID readed a card and send a request
+         * @param method of the request
+         * GET, POST, PUT or DELETE
+        */
+        void makePresent (std::function<int(HTTPClient&, String&)> method);
 };
 
 
