@@ -151,6 +151,13 @@ class WasHere {
             this->issuer = issuer;
         }
 
+    private:
+
+        /**
+         * Hidden functions
+        */
+
+        void assignVariables (String local);
 };
 
 
