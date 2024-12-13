@@ -1,13 +1,5 @@
 #include "WasHere.h"
 
-#include <Arduino.h>
-#include <ArduinoJson.h>
-
-#include <FS.h>
-#include <LittleFS.h>
-
-#include <stdexcept>
-
 // Constructors
 
 WasHere::WasHere () {
