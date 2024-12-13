@@ -1,7 +1,7 @@
 #include "WasHere.h"
 
 MFRC522 identificator;
-ArduinoJWT jwt;
+ArduinoJWT jwt("");
 
 // Constructors
 
@@ -19,7 +19,7 @@ void WasHere::run () {
 
     // Make JWT
 
-    jwt = ArduinoJWT(WasHere::getSecret());
+    jwt.setPSK(WasHere::getSecret());
 
     // Init RFID
 
