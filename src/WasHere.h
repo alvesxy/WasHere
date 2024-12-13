@@ -69,6 +69,88 @@ class WasHere {
         */
         String issuer;
 
+    public:
+
+        /**
+         * Getter
+        */
+
+        uint8_t getSS () const {
+            return SS;
+        }
+
+        uint8_t getRST () const {
+            return RST;
+        }
+
+        String getURL () const {
+            return url;
+        }
+
+        String getMethod () const {
+            return method;
+        }
+
+        String getSSID () const {
+            return ssid;
+        }
+
+        String getPassword () const {
+            return password;
+        }
+
+        std::vector<std::function<void(int http)>> getStates() const {
+            return states;
+        }
+
+        String getSecret() const {
+            return secret;
+        }
+
+        String getIssuer() const {
+            return issuer;
+        }
+
+        /**
+         * Setter
+        */
+
+        void setSS (const uint8_t& SS) {
+            this->SS = SS;
+        }
+
+        void setRST (const uint8_t& RST) {
+            this->RST = RST;
+        }
+
+        void setURL (const String& url) {
+            this->url = url;
+        }
+
+        void setMethod (const String& method) {
+            this->method = method;
+        }
+
+        void setSSID (const String& ssid) {
+            this->ssid = ssid;
+        }
+
+        void setPassword (const String& password) {
+            this->password = password;
+        }
+
+        void setStates (const std::vector<std::function<void(int http)>>& states) {
+            this->states = states;
+        }
+
+        void setSecret (const String& secret) {
+            this->secret = secret;
+        }
+
+        void setIssuer (const String& issuer) {
+            this->issuer = issuer;
+        }
+
 };
 
 
