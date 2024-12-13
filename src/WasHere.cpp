@@ -1,5 +1,7 @@
 #include "WasHere.h"
 
+MFRC522 identificator;
+
 // Constructors
 
 WasHere::WasHere () {
@@ -11,6 +13,53 @@ WasHere::WasHere (String directory) {
 }
 
 // Hidden functions
+
+void WasHere::run () {
+
+    // Init RFID
+
+    identificator = MFRC522(WasHere::getSS(), WasHere::getRST());
+    identificator.PCD_Init();
+
+    // Fill wifi data
+
+    WiFi.begin(WasHere::getSSID(), WasHere::getPassword());
+
+    // Find method of the request
+
+    std::function<int(HTTPClient&, String&)> method;
+
+    if (WasHere::getMethod() == "GET") {
+        method = [](HTTPClient& client, String& body) {
+            return client.sendRequest("GET", body);
+        };
+    } 
+            
+    else if (WasHere::getMethod() == "POST") {
+        method = [](HTTPClient& client, String& body) {
+            return client.POST(body);
+        };
+    } 
+            
+    else if (WasHere::getMethod() == "PUT") {
+        method = [](HTTPClient& client, String& body) {
+            return client.PUT(body);
+        };
+    }
+
+    else if (WasHere::getMethod() == "DELETE") {
+        method = [](HTTPClient& client, String& body) {
+            return client.sendRequest("DELETE", body);
+        };
+    }
+
+    // Make a loop to change present of the people
+
+    while (true) {
+        WasHere::makePresent(method);
+    }
+
+}
 
 void WasHere::assignVariables (String local) {
 
