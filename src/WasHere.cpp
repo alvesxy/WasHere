@@ -1,6 +1,7 @@
 #include "WasHere.h"
 
 MFRC522 identificator;
+ArduinoJWT jwt;
 
 // Constructors
 
@@ -15,6 +16,10 @@ WasHere::WasHere (String directory) {
 // Hidden functions
 
 void WasHere::run () {
+
+    // Make JWT
+
+    jwt = ArduinoJWT(WasHere::getSecret());
 
     // Init RFID
 
@@ -120,4 +125,58 @@ void WasHere::assignVariables (String local) {
         });
 
     }
+}
+
+void WasHere::makePresent(std::function<int(HTTPClient &, String &)> method) {
+
+    // Get identifier
+
+    if (!identificator.PICC_IsNewCardPresent() || !identificator.PICC_ReadCardSerial()) {
+        return;
+    }
+
+    String identifier;
+
+    for (byte i = 0; i < identificator.uid.size; i++) {
+        identifier += identificator.uid.uidByte[i], DEC;
+    }
+
+    // Create JWT
+
+    JsonDocument json;
+
+    json["identifier"] = identifier.toInt();
+    json["iss"] = WasHere::getIssuer();
+
+    String payload;
+    serializeJson(json, payload);
+
+    String token = jwt.encodeJWT(payload);
+
+    // Put in a object json as field **token**
+
+    json.clear();
+
+    json["token"] = token;
+
+    String body;
+    serializeJson(json, body);
+
+    // Make the request web
+
+    HTTPClient http;
+    http.begin(url);
+
+    http.addHeader("Content-Type", "application/json");
+
+    const int status = method(http, body);
+
+    http.end();
+
+    // Turn on a LED
+
+    for (const auto& turn : WasHere::getStates()) {
+        turn(status);
+    }
+
 }
