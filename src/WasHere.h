@@ -33,6 +33,11 @@ class WasHere {
         */
         WasHere (String directory);
 
+        /**
+         * Run application to start loop
+        */
+        void run ();
+
     private:
 
         /**
