@@ -16,6 +16,8 @@
 #include <FS.h>
 #include <LittleFS.h>
 
+#include <MFRC522.h>
+
 class WasHere {
 
     public:
@@ -182,6 +184,5 @@ class WasHere {
         */
         void makePresent (std::function<int(HTTPClient&, String&)> method);
 };
-
 
 #endif
