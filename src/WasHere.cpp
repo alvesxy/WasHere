@@ -179,4 +179,6 @@ void WasHere::makePresent(std::function<int(HTTPClient &, String &)> method) {
         turn(status);
     }
 
+    identificator.PICC_HaltA();
+
 }
