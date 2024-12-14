@@ -1,10 +1,10 @@
 # Tópicos 📜
-- [Objetivo](#Objetivo)
-- [Implementação](#Implementação)
-- [Tratando informações no backend](#tratando-informações-no-backend)
-- [Estrutura do Application.json](#estrutura-do-applicationjson)
-- [Agradecimentos](#Agradecimentos)
-- [Dados de contato](#dados-de-contato)
+- Objetivo
+- Implementação
+- Tratando informações no backend
+- Estrutura do Application.json
+- Agradecimentos
+- Dados de contato
 
 # Objetivo 🎯
 Ter um módulo, principalmente, de controle de presença simples e facilmente configurável usando RFID e ESP32. Porém, o módulo pode ser aplicado em vários casos, já que a responsabillidade da lógica está no backend.
